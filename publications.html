@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: black;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: bold;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .publications-list {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .publication {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .publication:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+            background: #f8f9fa;
+        }
+
+        .pub-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .pub-icon {
+            width: 240px;
+            height: 320px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2d3748;
+            font-size: 5rem;
+            font-weight: bold;
+            align-self: stretch;
+            overflow: hidden;
+        }
+
+        .pub-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .pub-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .pub-meta {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pub-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.1rem;
+            line-height: 1.2;
+        }
+
+        .pub-authors {
+            color: #4a5568;
+            font-size: 0.95rem;
+            margin-bottom: 0.1rem;
+            line-height: 1.4;
+        }
+
+        .pub-authors strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .pub-authors sup {
+            color: #2d3748;
+            font-weight: bold;
+        }
+
+        .equal-contribution {
+            font-size: 0.8rem;
+            color: #718096;
+            font-style: italic;
+            margin-top: 0.25rem;
+        }
+
+        .pub-venue {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        .year-badge {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .tldr {
+            background: #f7fafc;
+            border-left: 4px solid #2d3748;
+            padding: 0.5rem;
+            margin: 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .tldr-content {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .tldr-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2d3748;
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
+            display: inline;
+            margin-right: 0.5rem;
+        }
+
+        .tldr-text {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: inline;
+        }
+
+        .abstract {
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abstract-content {
+            color: #4a5568;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            max-height: 4.8rem; /* Show ~3 lines before fade */
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            border-radius: 6px;
+            padding: 0.5rem;
+            margin: -0.5rem;
+        }
+
+        .abstract-content:hover {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .abstract-content::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3.5rem; /* Much longer fade gradient */
+            width: 100%; /* Full width for transparency */
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.7) 60%, white 100%);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .abstract-preview-text {
+            position: absolute;
+            bottom: 0.0rem;
+            left: 50%;
+            background: transparent;
+            color: #6b7280;
+            font-size: 1.4rem;
+            padding: 0.2rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .abstract.expanded .abstract-content {
+            max-height: none;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e2e8f0;
+            padding-bottom: 2rem;
+        }
+
+        .abstract.expanded .abstract-content::after {
+            opacity: 0;
+        }
+
+        .abstract.expanded .abstract-preview-text {
+            opacity: 1;
+            bottom: 0;
+            transform: translateX(-50%) rotate(180deg);
+        }
+
+        .pub-links {
+            margin-top: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .pub-link {
+            padding: 0.3rem 0.8rem;
+            background: #e2e8f0;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .pub-link:hover {
+            background: #2d3748;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .pub-tags {
+            margin-top: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .tag {
+            padding: 0.2rem 0.6rem;
+            background: #f1f5f9;
+            color: #64748b;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .featured {
+            position: relative;
+        }
+
+        .featured::after {
+            content: '⭐';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .publication {
+                grid-template-columns: 160px 1fr;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .pub-icon {
+                width: 160px;
+                height: 200px;
+                font-size: 3rem;
+                background: #f8f9fa;
+                color: #2d3748;
+            }
+
+            .pub-image {
+                border-radius: 8px;
+            }
+
+            .pub-title {
+                font-size: 1.2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .publication {
+                grid-template-columns: 120px 1fr;
+                gap: 0.75rem;
+                padding: 1rem;
+            }
+
+            .pub-icon {
+                width: 120px;
+                height: 160px;
+                font-size: 2.5rem;
+                background: #f8f9fa;
+                color: #2d3748;
+            }
+
+            .pub-title {
+                font-size: 1.1rem;
+            }
+
+            .pub-content {
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Publications</h1>
+        
+        <div class="publications-list" id="publications-list">
+            <!-- Publications will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Load configuration from JSON file
+        async function loadConfig() {
+            try {
+                const response = await fetch('config.json');
+                const config = await response.json();
+                return config;
+            } catch (error) {
+                console.error('Error loading config:', error);
+                return {
+                    googleSheetId: null,
+                    sheetName: 'Sheet1',
+                    yourName: 'Your Name',
+                    fallbackToDemo: true
+                };
+            }
+        }
+        
+        // Load publications from Google Sheets
+        async function loadPublications() {
+            try {
+                // Load configuration
+                const config = await loadConfig();
+                
+                if (!config.googleSheetId) {
+                    throw new Error('No Sheet ID found in config');
+                }
+                
+                // Use Google Sheets CSV export URL
+                const csvUrl = `https://docs.google.com/spreadsheets/d/${config.googleSheetId}/gviz/tq?tqx=out:csv&sheet=${config.sheetName}`;
+                
+                const response = await fetch(csvUrl);
+                const csvText = await response.text();
+                
+                // Parse CSV to JSON
+                const publications = parseCSVToPublications(csvText, config);
+                
+                // Sort by year (newest first)
+                publications.sort((a, b) => b.year - a.year);
+                
+                renderPublications(publications, config);
+            } catch (error) {
+                console.error('Error loading publications from Google Sheets:', error);
+                // Fallback to demo data with default config
+                const defaultConfig = {
+                    yourName: 'Eivinas Butkus',
+                    highlightColor: '#2d3748',
+                    fallbackToDemo: true
+                };
+                renderPublications(getDemoData(), defaultConfig);
+            }
+        }
+
+        function parseCSVToPublications(csvText, config = {}) {
+            const lines = csvText.split('\n');
+            const headers = parseCSVLine(lines[0]);
+            const publications = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim() === '') continue;
+                
+                const values = parseCSVLine(lines[i]);
+                const pub = {};
+
+                headers.forEach((header, index) => {
+                    const cleanHeader = header.replace(/"/g, '').trim().toLowerCase();
+                    let value = values[index] ? values[index].replace(/"/g, '').trim() : '';
+
+                    switch (cleanHeader) {
+                        case 'title':
+                            pub.title = value;
+                            break;
+                        case 'authors':
+                            pub.authorsRaw = value; // Keep raw string for processing
+                            break;
+                        case 'year':
+                            pub.year = parseInt(value) || new Date().getFullYear();
+                            break;
+                        case 'venue':
+                            pub.venue = value;
+                            break;
+                        case 'icon':
+                            pub.icon = value || '📄';
+                            break;
+                        case 'tldr':
+                            pub.tldr = value;
+                            break;
+                        case 'abstract':
+                            pub.abstract = value;
+                            break;
+                        case 'link':
+                            pub.link = value;
+                            break;
+                        case 'image':
+                            pub.image = value;
+                            break;
+                        case 'doi':
+                        case 'pdf':
+                        case 'code':
+                        case 'project':
+                            if (value) {
+                                pub.links = pub.links || {};
+                                pub.links[cleanHeader] = value;
+                            }
+                            break;
+                        case 'tags':
+                            pub.tags = value ? value.split(',').map(t => t.trim()) : [];
+                            break;
+                        case 'featured':
+                            pub.featured = value.toLowerCase() === 'true' || value === '1';
+                            break;
+                    }
+                });
+
+                if (pub.title) { // Only add if has a title
+                    // Convert authorsRaw to authors for consistency
+                    if (pub.authorsRaw && !pub.authors) {
+                        pub.authors = pub.authorsRaw;
+                    }
+                    publications.push(pub);
+                }
+            }
+
+            return publications;
+        }
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current);
+            return result;
+        }
+
+        function renderPublications(publications, config = {}) {
+            const container = document.getElementById('publications-list');
+            container.innerHTML = '';
+
+            publications.forEach((pub, index) => {
+                const pubElement = createPublicationElement(pub, config);
+                container.appendChild(pubElement);
+                
+                // Stagger entrance animations
+                setTimeout(() => {
+                    pubElement.style.opacity = '1';
+                    pubElement.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        }
+
+        function formatAuthors(authorsString, highlightName = 'Your Name') {
+            if (!authorsString) return '';
+            
+            // Use semicolon as separator - much cleaner!
+            const authors = authorsString.split(';').map(author => author.trim());
+            
+            const formattedAuthors = authors.map(author => {
+                // Remove asterisk for name matching
+                const cleanAuthor = author.replace('*', '').trim();
+                
+                // Check for highlighting
+                const shouldHighlight = cleanAuthor === highlightName || 
+                                      cleanAuthor.toLowerCase().includes(highlightName.toLowerCase());
+                
+                // Handle asterisk for equal first authorship
+                let formattedAuthor = author;
+                if (author.includes('*')) {
+                    formattedAuthor = author.replace('*', '<sup>*</sup>');
+                }
+                
+                return shouldHighlight ? 
+                    `<strong>${formattedAuthor}</strong>` : 
+                    formattedAuthor;
+            });
+
+            // Handle academic conjunction rules
+            if (formattedAuthors.length === 1) {
+                return formattedAuthors[0];
+            } else if (formattedAuthors.length === 2) {
+                // Two authors: "Author1 & Author2"
+                return formattedAuthors.join(' & ');
+            } else {
+                // Three or more: "Author1, Author2, & Author3" (Oxford comma style)
+                // Or "Author1, Author2 & Author3" (no Oxford comma)
+                const lastAuthor = formattedAuthors.pop();
+                return formattedAuthors.join(', ') + ' & ' + lastAuthor;
+            }
+        }
+
+        function addEqualContributionNote(authorsString) {
+            // Check if there are multiple asterisks (equal first authors)
+            const asteriskCount = (authorsString.match(/\*/g) || []).length;
+            if (asteriskCount >= 2) {
+                return '<div class="equal-contribution">* Equal contribution</div>';
+            }
+            return '';
+        }
+
+        function createPublicationElement(pub, config = {}) {
+            const div = document.createElement('div');
+            div.className = `publication ${pub.featured ? 'featured' : ''}`;
+            div.style.opacity = '0';
+            div.style.transform = 'translateY(20px)';
+            div.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+            // Format authors and get equal contribution note
+            const formattedAuthors = formatAuthors(pub.authors, config.yourName);
+            const equalContributionNote = addEqualContributionNote(pub.authors || '');
+
+            // Create links HTML (including main publication link)
+            const allLinks = {};
+            
+            // Add main link first if it exists
+            if (pub.link) {
+                allLinks.link = pub.link;
+            }
+            
+            // Then add other links in preferred order
+            const linkOrder = ['pdf', 'doi', 'code', 'project'];
+            linkOrder.forEach(linkType => {
+                if (pub.links && pub.links[linkType]) {
+                    allLinks[linkType] = pub.links[linkType];
+                }
+            });
+            
+            // Add any remaining links not in the preferred order
+            if (pub.links) {
+                Object.entries(pub.links).forEach(([type, url]) => {
+                    if (!linkOrder.includes(type)) {
+                        allLinks[type] = url;
+                    }
+                });
+            }
+            
+            const linksHTML = Object.keys(allLinks).length > 0 ? 
+                Object.entries(allLinks).map(([type, url]) => 
+                    `<a href="${url}" class="pub-link" target="_blank">${type.toUpperCase()}</a>`
+                ).join('') : '';
+
+            // Create tags HTML
+            const tagsHTML = pub.tags ? pub.tags.map(tag => 
+                `<span class="tag">${tag}</span>`
+            ).join('') : '';
+
+            // Create icon HTML (image or emoji)
+            const iconHTML = pub.image ? 
+                `<img src="images/${pub.image}" alt="${pub.title}" class="pub-image">` : 
+                pub.icon;
+
+            div.innerHTML = `
+                <div class="pub-icon">${iconHTML}</div>
+                <div class="pub-content">
+                    <div class="pub-header">
+                        <h3 class="pub-title">${pub.title}</h3>
+                        <div class="pub-authors">${formattedAuthors}</div>
+                        ${equalContributionNote}
+                        <div class="pub-venue">
+                            <span>${pub.venue}</span>
+                            <span class="year-badge">${pub.year}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tldr">
+                        <div class="tldr-content">
+                            <span class="tldr-label">tl;dr:</span>
+                            <span class="tldr-text">${pub.tldr}</span>
+                        </div>
+                    </div>
+                    
+                    ${linksHTML ? `<div class="pub-links">${linksHTML}</div>` : ''}
+                    
+                    <div class="abstract">
+                        <div class="abstract-content">
+                            ${pub.abstract}
+                            <div class="abstract-preview-text">↓</div>
+                        </div>
+                    </div>
+                    
+                    ${tagsHTML ? `<div class="pub-tags">${tagsHTML}</div>` : ''}
+                </div>
+            `;
+
+            // Add click handler only for the abstract area
+            const abstractContent = div.querySelector('.abstract-content');
+            abstractContent.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                const abstract = div.querySelector('.abstract');
+                if (abstract.classList.contains('expanded')) {
+                    abstract.classList.remove('expanded');
+                } else {
+                    abstract.classList.add('expanded');
+                }
+            });
+
+            return div;
+        }
+
+        // Demo data fallback
+        function getDemoData() {
+            return [
+                {
+                    title: "Neural Mechanisms of Predictive Coding in Visual Cortex",
+                    authors: "Smith, Jr., J.*; Your Name*",
+                    year: 2024,
+                    venue: "Nature Neuroscience",
+                    icon: "🧠",
+                    link: "https://example.com/paper1",
+                    tldr: "We discovered that predictive coding in visual cortex follows a hierarchical pattern, with higher-level predictions cascading down to modulate early sensory processing in a context-dependent manner.",
+                    abstract: "The brain's ability to predict sensory input is fundamental to perception, yet the neural mechanisms underlying predictive coding remain poorly understood. Using high-resolution fMRI and computational modeling, we investigated how predictive signals propagate through visual cortical hierarchy.",
+                    links: {
+                        doi: "#",
+                        pdf: "#",
+                        code: "#"
+                    },
+                    tags: ["fMRI", "predictive coding", "visual cortex"],
+                    featured: true
+                }
+            ];
+        }
+
+        // Load publications when page loads
+        window.addEventListener('load', loadPublications);
+    </script>
+</body>
+</html>
