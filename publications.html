@@ -2,38 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, ini        .p        .publication::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 12px;
-            height: 12px;
-            background: #111;
-            clip-path: polygon(0 0, 100% 0, 0 100%);
-            z-index: 10;
-        }:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 12px;
-            height: 12px;
-            background: #111;
-            border-radius: 0;
-            z-index: 1;
-        }1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publications</title>
+    <link rel="stylesheet" href="header.css">
     <style>
         * {
             margin: 0;
-            .abstract-preview-text {
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .abstract-preview-text {
             position: absolute;
             bottom: -0.1rem;
             left: 50%;
             background: transparent;
-            color: #6b7280;
-            font-size: 1rem;
+            color: #6b7280                        case 'image':
+                            pub.image = value;
+                            break;
+                        case 'video':
+                            pub.video = value;
+                            break;
+                        case 'imagewidth':
+                            pub.imageWidth = parseFloat(value) || 1.0; // Default to 1.0 (100%)         font-size: 1rem;
             padding: 0.2rem;
             pointer-events: none;
             transition: all 0.3s ease;
@@ -47,69 +38,26 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100%;
+            overflow-y: scroll;
+        }
+
         body {
             font-family: Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: #333;
             background: white;
             min-height: 100vh;
-            padding: 0;
-            margin: 0;
-            padding-top: 120px;
-        }
-
-        .header {
-            background: white;
-            padding: 2rem 1rem 1rem 1rem;
-            border-bottom: 1px solid #e5e7eb;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .site-title {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: #111;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #666;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.3rem;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: #111;
-        }
-
-        .nav-links a.active {
-            color: #111;
-            font-weight: 600;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 1rem;
+            padding: 3rem 2rem;
         }
 
         h1 {
@@ -126,7 +74,7 @@
             font-size: 1.8rem;
             font-weight: bold;
             font-family: Helvetica, Arial, sans-serif;
-            margin: 2rem 0 1.5rem 0;
+            margin: 2rem 0 1.5rem 2.25rem;
             text-align: left;
         }
 
@@ -141,47 +89,61 @@
             position: relative;
             overflow: hidden;
             display: grid;
-            grid-template-columns: 240px 1fr;
+            grid-template-columns: 1fr 400px;
             gap: 0;
             align-items: start;
         }
 
         .pub-icon {
-            width: 240px;
+            width: 400px;
             height: 320px;
             background: transparent;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
+            padding: 0;
+            margin-top: 0.5rem;
+            box-sizing: border-box;
             color: #2d3748;
             font-size: 5rem;
             font-weight: bold;
-            align-self: stretch;
-            overflow: hidden;
-            padding: 1.25rem 0 1.25rem 1.25rem;
         }
 
         .pub-content {
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            padding: 1.25rem 2rem 1.25rem 1.25rem;
-        }
-            gap: 1.25rem;
-            align-items: start;
+            padding: 0 2rem 1.25rem 1.25rem;
+            position: relative;
+            top: 0;
+            margin-left: 1rem;
         }
 
         .pub-header {
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
+            margin-top: 0;
         }
 
         .pub-image {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 12px;
+            object-position: top center;
+            border-radius: 0;
+            display: block;
+            margin: 0;
+        }
+
+        .pub-video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: top center;
+            border-radius: 0;
+            display: block;
+            margin: 0;
         }
 
         .pub-content {
@@ -200,8 +162,14 @@
             font-size: 1.4rem;
             font-weight: 600;
             color: #2d3748;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.5rem 0;
+            padding: 0;
             line-height: 1.2;
+        }
+
+        .pub-header h3 {
+            margin: 0;
+            padding: 0;
         }
 
         .pub-authors {
@@ -304,9 +272,6 @@
             font-size: 0.95rem;
         }
 
-        .abstract-content:hover {
-            background: rgba(0,0,0,0.02);
-        }
 
                 .abstract-content::after {
             content: '';
@@ -375,18 +340,28 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
             .publication {
-                grid-template-columns: 160px 1fr;
+                grid-template-columns: 1fr;
                 gap: 1rem;
                 padding: 1.5rem;
             }
 
             .pub-icon {
-                width: 160px;
-                height: 200px;
+                width: 100%;
+                height: 300px;
+                box-sizing: border-box;
                 font-size: 3rem;
-                background: #f8f9fa;
+                background: transparent;
                 color: #2d3748;
+                order: -1;
+            }
+
+            .pub-content {
+                order: 2;
             }
 
             .pub-image {
@@ -405,25 +380,28 @@
 
         @media (max-width: 480px) {
             .publication {
-                grid-template-columns: 120px 1fr;
+                grid-template-columns: 1fr;
                 gap: 0.75rem;
                 padding: 1rem;
             }
 
             .pub-icon {
-                width: 120px;
-                height: 160px;
+                width: 100%;
+                height: 250px;
+                box-sizing: border-box;
                 font-size: 2.5rem;
-                background: #f8f9fa;
+                background: transparent;
                 color: #2d3748;
-            }
-
-            .pub-title {
-                font-size: 1.1rem;
+                order: -1;
             }
 
             .pub-content {
                 gap: 0.5rem;
+                order: 2;
+            }
+
+            .pub-title {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -431,12 +409,14 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="#" class="site-title">Eivinas Butkus</a>
-            <nav class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="publications.html" class="active">Publications</a>
-                <a href="#" onclick="alert('CV coming soon!')">CV</a>
-            </nav>
+            <div class="header-left">
+                <a href="#" class="site-title">Eivinas Butkus</a>
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="publications.html" class="active">Publications</a>
+                </nav>
+            </div>
+            <img src="images/eivinas_4.png" alt="Eivinas" class="header-image">
         </div>
     </header>
 
@@ -764,13 +744,16 @@
                 `<span class="tag">${tag}</span>`
             ).join('') : '';
 
-            // Create icon HTML (image or emoji)
+            // Create icon HTML (auto-detect video vs image)
             const iconHTML = pub.image ? 
-                `<img src="images/${pub.image}" alt="${pub.title}" class="pub-image" style="width: ${(pub.imageWidth || 1.0) * 100}%;">` : 
+                (pub.image.endsWith('.mp4') ? 
+                    `<video autoplay loop muted playsinline class="pub-video" style="width: ${(pub.imageWidth || 1.0) * 100}%;">
+                        <source src="images/${pub.image}" type="video/mp4">
+                    </video>` :
+                    `<img src="images/${pub.image}" alt="${pub.title}" class="pub-image" style="width: ${(pub.imageWidth || 1.0) * 100}%;">`) : 
                 pub.icon;
 
             div.innerHTML = `
-                <div class="pub-icon">${iconHTML}</div>
                 <div class="pub-content">
                     <div class="pub-header">
                         <h3 class="pub-title">${pub.title}</h3>
@@ -781,12 +764,12 @@
                         </div>
                     </div>
                     
-                    <div class="tldr">
+                    ${pub.tldr ? `<div class="tldr">
                         <div class="tldr-content">
                             <span class="tldr-label">tl;dr</span>
                             <span class="tldr-text">${pub.tldr}</span>
                         </div>
-                    </div>
+                    </div>` : ''}
                     
                     ${linksHTML ? `<div class="pub-links">${linksHTML}</div>` : ''}
                     
@@ -799,6 +782,7 @@
                     
                     ${tagsHTML ? `<div class="pub-tags">${tagsHTML}</div>` : ''}
                 </div>
+                <div class="pub-icon">${iconHTML}</div>
             `;
 
             // Add click handler only for the abstract area
