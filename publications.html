@@ -382,17 +382,17 @@
             }
 
             .container {
-                padding: 2rem 0.1rem;
+                padding: 1.5rem 0.1rem;
             }
 
             .publication {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
-                padding: 1.5rem;
+                gap: 1rem;
+                padding: 1rem;
             }
 
             .publications-list {
-                gap: 1rem; /* Reduce from default 2rem */
+                gap: 0.75rem; /* Reduce from default 2rem */
             }
 
             
@@ -431,7 +431,7 @@
 
             .pub-content {
                 order: 2;
-                padding: 0 0.25rem;
+                padding: 0 0.1rem;
             }
 
             .pub-image {
@@ -454,7 +454,7 @@
 
             h1 {
                 font-size: 2rem;
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
             }
         }
 
@@ -943,8 +943,23 @@
                 abstractContent.addEventListener('click', (e) => {
                     e.stopPropagation();
                     const abstract = div.querySelector('.abstract');
-                    if (abstract.classList.contains('expanded')) {
+                    const wasExpanded = abstract.classList.contains('expanded');
+                    
+                    if (wasExpanded) {
                         abstract.classList.remove('expanded');
+                        
+                        // Scroll back up to publication title on mobile when collapsing
+                        if (window.innerWidth <= 1000) {
+                            const publicationElement = div;
+                            const rect = publicationElement.getBoundingClientRect();
+                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                            const targetPosition = scrollTop + rect.top - 20; // 20px offset from top
+                            
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
                     } else {
                         abstract.classList.add('expanded');
                     }
