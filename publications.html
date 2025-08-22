@@ -357,13 +357,37 @@
         }
 
         @media (max-width: 1000px) {
+            /* Bold separator after header */
+            .header::after {
+                content: '';
+                display: block;
+                width: 80%;
+                height: 2px;
+                background: #2d3748;
+                margin: 1.5rem auto 0;
+                border-radius: 2px;
+            }
+
+            /* Simple centered separators between publications */
+            .container .publication + .publication::before {
+                content: '';
+                position: absolute;
+                top: -1rem;
+                left: calc(50% - 20px);
+                width: 40px;
+                height: 2px;
+                background: #2d3748;
+                border-radius: 1px;
+                z-index: 10;
+            }
+
             .container {
-                padding: 2rem 1.5rem;
+                padding: 2rem 0.5rem;
             }
 
             .publication {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 1.5rem;
                 padding: 1.5rem;
             }
 
@@ -393,7 +417,7 @@
 
             .pub-icon {
                 width: 100%;
-                height: 300px;
+                min-height: 150px;
                 box-sizing: border-box;
                 font-size: 3rem;
                 background: transparent;
@@ -407,11 +431,21 @@
 
             .pub-content {
                 order: 2;
+                padding: 0 0.25rem;
             }
 
             .pub-image {
                 border-radius: 8px;
                 object-position: bottom center;
+                width: 90% !important;
+                max-width: 90% !important;
+            }
+
+            .pub-video {
+                border-radius: 8px;
+                object-position: bottom center;
+                width: 90% !important;
+                max-width: 90% !important;
             }
 
             .pub-title {
@@ -681,7 +715,7 @@
             // Add Other section if there are other publications
             if (otherPubs.length > 0) {
                 const otherSection = document.createElement('div');
-                otherSection.innerHTML = '<h2 class="section-title">Full Publication List</h2>';
+                otherSection.innerHTML = '<h2 class="section-title">Other Publications</h2>';
                 container.appendChild(otherSection);
 
                 otherPubs.forEach((pub) => {
@@ -856,6 +890,52 @@
                 </div>
                 <div class="pub-icon">${iconHTML}</div>
             `;
+
+            // Add dynamic height adjustment for mobile images/videos
+            if (window.innerWidth <= 1000) {
+                const pubIcon = div.querySelector('.pub-icon');
+                const mediaElement = div.querySelector('.pub-image, .pub-video');
+                
+                if (mediaElement && pubIcon) {
+                    const adjustHeight = () => {
+                        const containerWidth = pubIcon.clientWidth;
+                        if (mediaElement.tagName === 'IMG') {
+                            // For images, wait for load and calculate aspect ratio
+                            if (mediaElement.complete) {
+                                const aspectRatio = mediaElement.naturalHeight / mediaElement.naturalWidth;
+                                const calculatedHeight = containerWidth * aspectRatio;
+                                const maxHeight = 400; // Maximum height to prevent very tall images
+                                const minHeight = 150; // Minimum height
+                                const finalHeight = Math.max(minHeight, Math.min(calculatedHeight, maxHeight));
+                                pubIcon.style.height = finalHeight + 'px';
+                            } else {
+                                mediaElement.onload = () => {
+                                    const aspectRatio = mediaElement.naturalHeight / mediaElement.naturalWidth;
+                                    const calculatedHeight = containerWidth * aspectRatio;
+                                    const maxHeight = 400;
+                                    const minHeight = 150;
+                                    const finalHeight = Math.max(minHeight, Math.min(calculatedHeight, maxHeight));
+                                    pubIcon.style.height = finalHeight + 'px';
+                                };
+                            }
+                        } else if (mediaElement.tagName === 'VIDEO') {
+                            // For videos, use loadedmetadata event
+                            mediaElement.addEventListener('loadedmetadata', () => {
+                                const aspectRatio = mediaElement.videoHeight / mediaElement.videoWidth;
+                                const calculatedHeight = containerWidth * aspectRatio;
+                                const maxHeight = 400;
+                                const minHeight = 150;
+                                const finalHeight = Math.max(minHeight, Math.min(calculatedHeight, maxHeight));
+                                pubIcon.style.height = finalHeight + 'px';
+                            });
+                        }
+                    };
+                    
+                    // Adjust height initially and on window resize
+                    adjustHeight();
+                    window.addEventListener('resize', adjustHeight);
+                }
+            }
 
             // Add click handler only for the abstract area
             const abstractContent = div.querySelector('.abstract-content');

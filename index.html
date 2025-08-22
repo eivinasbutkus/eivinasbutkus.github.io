@@ -148,18 +148,35 @@
         }
 
         @media (max-width: 768px) {
+            /* Bold separator after header */
+            .header::after {
+                content: '';
+                display: block;
+                width: 80%;
+                height: 2px;
+                background: #2d3748;
+                margin: 1.5rem auto 0;
+                border-radius: 2px;
+            }
+
             .hero-section {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
 
+            .container {
+                padding: 2rem 2rem;
+            }
+
             .bio-content {
                 order: 1;
+                padding: 0 1rem;
             }
 
             .bio-content p {
                 font-size: 1rem;
                 line-height: 1.7;
+                margin-bottom: 1.5rem;
             }
 
             .profile-section {
@@ -223,7 +240,7 @@
                 </p>
 
                 <p>
-                    Before my PhD, I was a research assistant in Ilker Yildirim's Cognitive and Neural Computation Lab at Yale University.
+                    Before the PhD, I was a research assistant in Ilker Yildirim's Cognitive and Neural Computation Lab at Yale University.
                     Going back even further, I got my master's in computer science from Imperial College London (supervised by Antoine Cully)
                     and my bachelor's in philosophy from King's College London (supervised by Patrick Butlin and David Papineau).
                 </p>
