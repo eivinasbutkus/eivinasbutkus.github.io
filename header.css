@@ -33,7 +33,7 @@
 }
 
 .header-image {
-    height: 330px;
+    height: 260px;
     width: auto;
     border-radius: 30px;
     object-fit: cover;
@@ -45,20 +45,19 @@
 }
 
 .nav-links a {
-    color: black;
+    color: #999;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 2rem;
     transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-    color: #666;
+    color: #444;
 }
 
 .nav-links a.active {
     color: black;
-    font-weight: 600;
 }
 
 /* Mobile Responsive Header Styles */

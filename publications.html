@@ -110,7 +110,6 @@
 
         .pub-icon {
             width: 500px;
-            height: 400px;
             background: transparent;
             display: flex;
             align-items: flex-start;
@@ -142,7 +141,8 @@
 
         .pub-image {
             width: 100%;
-            height: 100%;
+            height: auto;
+            max-height: 380px;
             object-fit: contain;
             object-position: top center;
             border-radius: 0;
@@ -152,7 +152,8 @@
 
         .pub-video {
             width: 100%;
-            height: 100%;
+            height: auto;
+            max-height: 380px;
             object-fit: contain;
             object-position: top center;
             border-radius: 0;
@@ -520,10 +521,14 @@
                 <a href="#" class="site-title">Eivinas Butkus</a>
                 <nav class="nav-links">
                     <a href="index.html">Home</a>
+                    <a href="background.html">Background</a>
                     <a href="publications.html" class="active">Publications</a>
                 </nav>
             </div>
-            <img src="images/eivinas_4.png" alt="Eivinas" class="header-image">
+            <picture>
+                <source srcset="images/eivinas_4.webp" type="image/webp">
+                <img src="images/eivinas_4.png" alt="Eivinas" class="header-image">
+            </picture>
         </div>
     </header>
 
@@ -852,12 +857,19 @@
             ).join('') : '';
 
             // Create icon HTML (auto-detect video vs image)
-            const iconHTML = pub.image ? 
-                (pub.image.endsWith('.mp4') ? 
+            // image field should be filename without extension (e.g. "my_figure")
+            // tries webp → png → jpg in order
+            const imgBase = pub.image ? pub.image.replace(/\.(webp|png|jpg|jpeg)$/i, '') : null;
+            const iconHTML = pub.image ?
+                (pub.image.endsWith('.mp4') ?
                     `<video autoplay loop muted playsinline class="pub-video" style="width: ${(pub.imageWidth || 1.0) * 100}%;">
                         <source src="images/${pub.image}" type="video/mp4">
                     </video>` :
-                    `<img src="images/${pub.image}" alt="${pub.title}" class="pub-image" style="width: ${(pub.imageWidth || 1.0) * 100}%;">`) : 
+                    `<picture>
+                        <source srcset="images/${imgBase}.webp" type="image/webp">
+                        <source srcset="images/${imgBase}.png" type="image/png">
+                        <img src="images/${imgBase}.jpg" alt="${pub.title}" class="pub-image" style="width: ${(pub.imageWidth || 1.0) * 100}%;">
+                    </picture>`) :
                 pub.icon;
 
             div.innerHTML = `

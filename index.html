@@ -11,7 +11,7 @@
                 order: 1;
                 padding: 0 0.25rem;
             }tent="Eivinas Butkus personal website. 5th year PhD student in Psychology at Columbia University, working with Niko Kriegeskorte. Trainee at the NSF AI Institute for Artificial and Natural Intelligence (ARNI).">
-    <meta name="keywords" content="Eivinas Butkus, PhD student, Psychology, Neuroscience, Computer Science, Columbia University, Niko Kriegeskorte, NSF AI Institute, Artificial Intelligence, Natural Intelligence, Cognitive Computational Neuroscience">
+    <meta name="keywords" content="Eivinas Butkus, PhD student, Psychology, Neuroscience, Computer Science, Columbia University, Niko Kriegeskorte, NSF AI Institute, Artificial Intelligence, Natural Intelligence, Cognitive Computational Neuroscience, Resource Costs, Attention, World Models">
     <title>Eivinas Butkus</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -49,7 +49,7 @@
 
         .hero-section {
             display: grid;
-            grid-template-columns: 400px 1fr;
+            grid-template-columns: 320px minmax(auto, 690px);
             gap: 4rem;
             align-items: start;
             margin-bottom: 1rem;
@@ -84,6 +84,9 @@
         .profile-image img {
             width: 100%;
             height: auto;
+            max-height: 380px;
+            object-fit: cover;
+            object-position: top;
             display: block;
         }
 
@@ -109,7 +112,7 @@
 
         .bio-content p {
             font-size: 1.1rem;
-            line-height: 1.7;
+            line-height: 1.75;
             color: #444;
             margin-bottom: 1rem;
         }
@@ -126,7 +129,7 @@
             color: #666;
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             transition: all 0.2s ease;
         }
 
@@ -215,10 +218,14 @@
                 <a href="index.html" class="site-title">Eivinas Butkus</a>
                 <nav class="nav-links">
                     <a href="index.html" class="active">Home</a>
+                    <a href="background.html">Background</a>
                     <a href="publications.html">Publications</a>
                 </nav>
             </div>
-            <img src="images/eivinas_4.png" alt="Eivinas" class="header-image">
+            <picture>
+                <source srcset="images/eivinas_4.webp" type="image/webp">
+                <img src="images/eivinas_4.png" alt="Eivinas" class="header-image">
+            </picture>
         </div>
     </header>
 
@@ -226,7 +233,10 @@
         <div class="hero-section">
             <div class="profile-section">
                 <div class="profile-image">
-                    <img src="images/eivinas_2.png" alt="Eivinas Butkus">
+                    <picture>
+                        <source srcset="images/eivinas_2.webp" type="image/webp">
+                        <img src="images/eivinas_2.png" alt="Eivinas Butkus">
+                    </picture>
                 </div>
                 <div class="contact-links">
                     <a href="#" onclick="location.href='mailto:' + 'eb3407' + '@' + 'columbia.edu'; return false;">eb3407@columbia.edu</a>
@@ -236,21 +246,26 @@
             
             <div class="bio-content">
                 <p>
-                    I'm a 5th year PhD student in Psychology at Columbia University, working with Niko Kriegeskorte.
-                    I'm also a trainee at the NSF AI Institute for Artificial and Natural Intelligence (ARNI).
+                    I'm a 5th year PhD student in Psychology at Columbia University, working with Niko Kriegeskorte,
+                    and a trainee at the NSF AI Institute for Artificial and Natural Intelligence (ARNI).
                 </p>
 
                 <p>
-                    I have broad interests in cognitive computational neuroscience.
-                    Some of my work has focused on neural network models of biological resource costs, including space, time and energy.
-                    I'm also interested in mechanistic interpretability and emergent structured/causal representations within deep neural networks.
+                    I study <b>how resource constraints shape intelligence</b>.
+                    In previous work, we demonstrated that
+                        <a href="https://www.biorxiv.org/content/10.64898/2026.03.18.710397v1" target="_blank">attention mechanisms can cut the energetic costs of vision in half</a>.
+                        In ongoing work, we're exploring how artificial and biological neural networks may trade multiple resource costs
+                        (e.g., <a href="https://arxiv.org/abs/2605.25174" target="_blank">space and time</a>) to achieve a certain level of performance.
                 </p>
 
                 <p>
-                    Before the PhD, I was a research assistant in Ilker Yildirim's Cognitive and Neural Computation Lab at Yale University.
-                    Going back even further, I got my master's in computer science from Imperial College London (supervised by Antoine Cully)
-                    and my bachelor's in philosophy from King's College London (supervised by Patrick Butlin and David Papineau).
+                    Ever since my bachelor's degree in philosophy, I've also been drawn to <b>how brains and machines build internal models of the world</b>.
+                    Previously, we have shown that 
+                    <a href="https://proceedings.neurips.cc/paper_files/paper/2025/file/6291ca1d98c37d12db760ec0c1f6cb25-Paper-Conference.pdf" target="_blank">internal causal models can emerge through next-token prediction</a>.
+                    At CCN 2026, I will be leading a 
+                    <a href="https://ccneuro.org" target="_blank">generative adversarial collaboration (GAC) on emergent world models</a>.
                 </p>
+
             </div>
         </div>
     </div>

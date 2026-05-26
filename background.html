@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background – Eivinas Butkus</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="stylesheet" href="header.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: black;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .timeline-entry {
+            display: grid;
+            grid-template-columns: 120px 140px 1fr;
+            gap: 0 2.5rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            align-items: start;
+        }
+
+        .timeline-entry:first-child {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .timeline-years {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 500;
+            padding-top: 0.2rem;
+            white-space: nowrap;
+        }
+
+        .timeline-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 0.1rem;
+        }
+
+        .timeline-logo img {
+            max-width: 120px;
+            max-height: 90px;
+            object-fit: contain;
+            opacity: 0.85;
+        }
+
+        .logo-placeholder {
+            width: 70px;
+            height: 50px;
+            background: #f3f4f6;
+            border-radius: 6px;
+            border: 1px dashed #d1d5db;
+        }
+
+        .timeline-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .timeline-position {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #111;
+        }
+
+        .timeline-institution {
+            font-size: 1.05rem;
+            color: #444;
+            font-weight: 500;
+        }
+
+        .timeline-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 0.2rem;
+        }
+
+        .cv-link {
+            display: inline-flex;
+            align-items: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .cv-link:hover {
+            color: #111;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-entry {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 1.5rem 0;
+            }
+
+            .timeline-years {
+                font-size: 0.9rem;
+                color: #aaa;
+            }
+
+            .timeline-logo {
+                display: none;
+            }
+
+            .timeline-position {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="site-title">Eivinas Butkus</a>
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="background.html" class="active">Background</a>
+                    <a href="publications.html">Publications</a>
+                </nav>
+            </div>
+            <picture>
+                <source srcset="images/eivinas_4.webp" type="image/webp">
+                <img src="images/eivinas_4.png" alt="Eivinas" class="header-image">
+            </picture>
+        </div>
+    </header>
+
+    <div class="container">
+        <p style="margin-bottom: 2rem;">
+            <a href="docs/eivinas_butkus_cv.pdf" target="_blank" class="cv-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 0.4rem; margin-bottom: 2px;">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                </svg>Full CV (PDF)
+            </a>
+        </p>
+        <div class="timeline">
+
+            <div class="timeline-entry">
+                <div class="timeline-years">2024 – present</div>
+                <div class="timeline-logo">
+                    <!-- <div class="logo-placeholder"></div> -->
+                    <img src="bg_images/arni.png" alt="ARNI Logo">
+                </div>
+                <div class="timeline-text">
+                    <div class="timeline-position">Trainee</div>
+                    <div class="timeline-institution">NSF AI Institute for Artificial and Natural Intelligence</div>
+                    <div class="timeline-description">Co-organizing the working group on multi-resource-cost optimization of neural networks</div>
+                </div>
+            </div>
+
+            <div class="timeline-entry">
+                <div class="timeline-years">2021 – present</div>
+                <div class="timeline-logo">
+                    <!-- <div class="logo-placeholder"></div> -->
+                    <img src="bg_images/columbia.png" alt="Columbia University Logo">
+                </div>
+                <div class="timeline-text">
+                    <div class="timeline-position">PhD Psychology</div>
+                    <div class="timeline-institution">Columbia University</div>
+                    <div class="timeline-description">Supervised by Niko Kriegeskorte</div>
+                </div>
+            </div>
+
+
+            <div class="timeline-entry">
+                <div class="timeline-years">2019 – 2021</div>
+                <div class="timeline-logo">
+                    <!-- <div class="logo-placeholder"></div> -->
+                    <img src="bg_images/yale.png" alt="Yale University Logo">
+
+                </div>
+                <div class="timeline-text">
+                    <div class="timeline-position">Research Assistant</div>
+                    <div class="timeline-institution">Yale University</div>
+                    <div class="timeline-description">Ilker Yildirim's Cognitive and Neural Computation Lab</div>
+                </div>
+            </div>
+
+            <div class="timeline-entry">
+                <div class="timeline-years">2018 – 2019</div>
+                <div class="timeline-logo">
+                    <!-- <div class="logo-placeholder"></div> -->
+                    <img src="bg_images/imperial.png" alt="Imperial College London Logo">
+                </div>
+                <div class="timeline-text">
+                    <div class="timeline-position">MSc Computer Science</div>
+                    <div class="timeline-institution">Imperial College London</div>
+                    <div class="timeline-description">Supervised by Antoine Cully.<br>Thesis: "Dimensionality Reduction Techniques for Automatic Behavior Descriptors"</div>
+                </div>
+            </div>
+
+            <div class="timeline-entry">
+                <div class="timeline-years">2015 – 2018</div>
+                <div class="timeline-logo">
+                    <!-- <div class="logo-placeholder"></div> -->
+                    <img src="bg_images/kcl.svg" alt="King's College London Logo">
+                </div>
+                <div class="timeline-text">
+                    <div class="timeline-position">BA Philosophy</div>
+                    <div class="timeline-institution">King's College London</div>
+                    <div class="timeline-description">Supervised by Patrick Butlin and David Papineau.<br>Thesis: "Models, Understanding, and Artificial Intelligence"</div>
+                </div>
+            </div>
+
+            <div class="timeline-entry">
+                <div class="timeline-years">2014 – 2015</div>
+                <div class="timeline-logo">
+                    <!-- <div class="logo-placeholder"></div> -->
+                    <img src="bg_images/vilnius_university.png" alt="Vilnius University Logo">
+                </div>
+                <div class="timeline-text">
+                    <div class="timeline-position">BSc Mathematics</div>
+                    <div class="timeline-institution">Vilnius University</div>
+                    <div class="timeline-description">One year completed</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
