@@ -1,3 +1,21 @@
+/* ── Global link colours (single source of truth) ── */
+a:link, a:visited { color: #33349e; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header overrides — nav and site title are not content links */
+.site-title,
+.site-title:link,
+.site-title:visited { color: black; text-decoration: none; }
+.site-title:hover { text-decoration: none; }
+
+.nav-links a,
+.nav-links a:link,
+.nav-links a:visited { color: #999; text-decoration: none; }
+.nav-links a:hover { color: #444; text-decoration: none; }
+.nav-links a.active,
+.nav-links a.active:link,
+.nav-links a.active:visited { color: black; }
+
 .header {
     background: white;
     padding: 3rem 2rem 2rem 2rem;
