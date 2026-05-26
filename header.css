@@ -1,20 +1,32 @@
 /* ── Global link colours (single source of truth) ── */
-a:link, a:visited { color: #33349e; text-decoration: none; }
-a:hover { text-decoration: underline; }
+a:link, a:visited { color: #2c3582 !important; text-decoration: none !important; }
+a:hover { text-decoration: underline !important; }
+
+/* Contact links (email, Google Scholar) — keep grey */
+.contact-links a,
+.contact-links a:link,
+.contact-links a:visited { color: #666 !important; text-decoration: none !important; }
+.contact-links a:hover { color: #111 !important; text-decoration: none !important; }
+
+/* CV link — plain text colour */
+.cv-link,
+.cv-link:link,
+.cv-link:visited { color: #444 !important; text-decoration: none !important; }
+.cv-link:hover { color: #111 !important; text-decoration: none !important; }
 
 /* Header overrides — nav and site title are not content links */
 .site-title,
 .site-title:link,
-.site-title:visited { color: black; text-decoration: none; }
-.site-title:hover { text-decoration: none; }
+.site-title:visited { color: black !important; text-decoration: none !important; }
+.site-title:hover { text-decoration: none !important; }
 
 .nav-links a,
 .nav-links a:link,
-.nav-links a:visited { color: #999; text-decoration: none; }
-.nav-links a:hover { color: #444; text-decoration: none; }
+.nav-links a:visited { color: #999 !important; text-decoration: none !important; }
+.nav-links a:hover { color: #444 !important; text-decoration: none !important; }
 .nav-links a.active,
 .nav-links a.active:link,
-.nav-links a.active:visited { color: black; }
+.nav-links a.active:visited { color: black !important; }
 
 .header {
     background: white;
